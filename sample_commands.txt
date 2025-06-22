@@ -1,0 +1,62 @@
+Use these commands after compiling the executable.
+
+Create executable:
+
+g++ -std=c++17 -g -o tinydb ./db.cpp
+
+Note: db.cpp and db.h should be in the same folder when compiling.
+
+==============================================================================
+
+Create test tables:
+
+./tinydb "create table employee (emp_id int NOT NULL, f_name char(20), l_name char(20), dept char(20))"
+./tinydb "create table department (dept_id char(20) NOT NULL, dept_name char(20))"
+
+Insert into employee table:
+
+./tinydb "insert into employee values (1001, 'Maya', 'Chen', '2001')"
+./tinydb "insert into employee values (1002, 'Noah', 'Patel', '2001')"
+./tinydb "insert into employee values (1003, 'Iris', 'Morgan', '2002')"
+./tinydb "insert into employee values (1004, 'Leo', 'Rivera', '2002')"
+
+Insert into department table:
+
+./tinydb "insert into department values ('2001', 'Platform')"
+./tinydb "insert into department values ('2002', 'Storage')"
+
+Sample select queries:
+
+./tinydb "select * from employee"
+./tinydb "select * from department"
+./tinydb "select emp_id, f_name, l_name, dept from employee"
+./tinydb "select dept_id, dept_name from department"
+./tinydb "select emp_id, f_name, l_name, dept_name from employee natural join department on dept = dept_id"
+./tinydb "select emp_id, f_name, l_name, dept_name from employee natural join department on dept = dept_id where dept='2001'"
+./tinydb "select emp_id, f_name, l_name, dept_name from employee natural join department on dept = dept_id where dept='2002' order by emp_id"
+./tinydb "select * from employee natural join department on dept = dept_id"
+./tinydb "select * from employee natural join department on dept = dept_id where dept_name='Storage'"
+./tinydb "select * from employee natural join department on dept = dept_id where dept_id='2002'"
+./tinydb "select * from employee natural join department on dept = dept_id order by emp_id"
+./tinydb "select * from employee natural join department on dept = dept_id order by emp_id where dept_name='Storage'"
+./tinydb "select * from employee where emp_id=1001 or l_name='Morgan'"
+./tinydb "select count(emp_id) from employee"
+./tinydb "select sum(emp_id) from employee"
+./tinydb "select avg(emp_id) from employee"
+./tinydb "select count(emp_id) from employee where dept='2002'"
+./tinydb "select count(emp_id) from employee natural join department on dept = dept_id"
+./tinydb "select count(emp_id) from employee natural join department on dept = dept_id where dept_name='Storage'"
+
+Delete query:
+
+./tinydb "delete from employee where emp_id=1001"
+
+Update query:
+
+./tinydb "update employee set emp_id=3001 where emp_id=1001"
+
+Other commands:
+
+./tinydb "drop table department"
+./tinydb "list table"
+./tinydb "list schema for employee"
