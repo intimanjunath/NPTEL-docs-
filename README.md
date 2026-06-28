@@ -115,3 +115,10 @@ tiny-sql-engine/
 ## Notes
 
 This is an educational database engine, not a production database. It is meant to make database internals easier to understand by implementing the core pieces directly in C++.
+
+## Implementation Notes
+
+- Table data is intentionally stored in binary files so row layout, offsets, and update behavior stay visible in the code.
+- Deleted rows are marked and reused instead of immediately compacting files, which keeps writes simple and predictable.
+- Query support is scoped to a learning engine: the focus is storage, parsing, and execution flow rather than SQL completeness.
+- Generated files such as `dbfile.bin`, `.tab` tables, and compiled binaries should stay out of version control.
